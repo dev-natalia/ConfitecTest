@@ -2,7 +2,10 @@ from typing import Dict
 
 import requests
 import json
+from uuid import uuid4
 from urllib.parse import quote
+
+from Persistency.dynamo import insert_data
 
 BASE = "https://api.genius.com/{}"
 SEARCH_BY_NAME = "search?q={}"
@@ -10,8 +13,15 @@ SEARCH_BY_ID_AND_POPULARITY = "artists/{}/songs?per_page=10&sort=popularity"
 CLIENT_ACCESS_TOKEN = "j0RTLKZAgEi7lbB2Ol6VFQtedYnV1-1J4LGWnCAVHqzKuYcwWWr9p0eccFPPVZl6"
 
 
+def post(artist_name):
+    response = get_artist(artist_name=artist_name)
+    uid = str(uuid4())
+    insert_data(artist_name=artist_name, uid=uid)
+    return response
+
+
 def get_artist(artist_name):
-    query_url = BASE.format(SEARCH_BY_NAME).format(quote(artist_name.lower()))
+    query_url = BASE.format(SEARCH_BY_NAME).format(quote(artist_name))
     headers = {"Authorization": f"Bearer {CLIENT_ACCESS_TOKEN}"}
     response = requests.get(url=query_url, headers=headers).content.decode("utf8")
     data = json.loads(response)
