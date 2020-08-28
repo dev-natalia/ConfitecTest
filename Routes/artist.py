@@ -14,7 +14,7 @@ def search_artist():
         return missing_body_parameter()
 
     cache = request.args.get("cache")
-    if cache != "False":
+    if cache != "False" and cache != "false":
         cache = True
     else:
         cache = False
