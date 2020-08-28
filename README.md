@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This API uses the Genius' API to get the 10 most played songs by an given artist. It was created for a job proposal test.
+This API uses the Genius' API to get the 10 most played songs by a given artist. It was created for a job proposal test.
 
 ### Technologies
 - Python 3.6
