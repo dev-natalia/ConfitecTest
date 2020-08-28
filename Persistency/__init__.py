@@ -4,8 +4,8 @@ import redis
 
 REDIS_DB = redis.StrictRedis(host="localhost", port=6379, db=0)
 
-DYNAMO_CLIENT = boto3.client("dynamodb", endpoint_url="http://localhost:8000")
-DYNAMO_RESOURCE = boto3.resource("dynamodb", endpoint_url="http://localhost:8000")
+DYNAMO_CLIENT = boto3.client("dynamodb")
+DYNAMO_RESOURCE = boto3.resource("dynamodb")
 
 table_name = 'ConfitecTest'
 existing_tables = DYNAMO_CLIENT.list_tables()['TableNames']
